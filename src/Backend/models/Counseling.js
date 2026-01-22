@@ -52,4 +52,4 @@ const counselingSchema = new mongoose.Schema({
   timestamps: true
 });
 
-module.exports = mongoose.model('Counseling', counselingSchema);
+module.exports = mongoose.models.Counseling || mongoose.model("Counseling", counselingSchema);

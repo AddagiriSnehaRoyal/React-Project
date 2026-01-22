@@ -8,6 +8,8 @@ const studentRoutes = require('./routes/students');
 const errorHandler = require("./middleware/errorHandler");
 const multer = require("multer"); 
 const morgan = require("morgan");
+const User1 = require("./models/User");
+require("dotenv").config();
 
 app.use(morgan("combined"));
 app.use("/api/students", studentRoutes);
@@ -20,9 +22,20 @@ app.use(cors());            // Allow frontend to access backend
 app.use(express.json());    // Enable JSON body parsing
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api/courses', require('./routes/courses'));
-app.use('/api/events', require('./routes/events'));
-app.use('/api/notices', require('./routes/notices'));
+// app.use('/api/courses', require('./routes/courses'));
+// app.use('/api/events', require('./routes/events'));
+// app.use('/api/notices', require('./routes/notices'));
+
+
+app.use("/api", require("./routes/auth.routes"));
+app.use("/api", require("./routes/admission.routes"));
+app.use("/api", require("./routes/counseling.routes"));
+app.use("/api", require("./routes/events.routes"));
+app.use("/api", require("./routes/notice.routes"));
+
+app.get("/", (req, res) => {
+  res.send("Backend is running successfully ");
+});
 
 // POST ROUTE
 app.post("/add-user", async (req, res) => {
@@ -139,6 +152,20 @@ app.use((error, req, res, next) => {
   });
 });
 
+
+
+app.post("/create-admin", async (req, res) => {
+  const user = new User({
+    name: "Admin",
+    email: "admin@test.com",
+    password: "12345678",
+    phone: "9999999999",   
+    role: "Admin"
+  });
+
+  await user.save();
+  res.json({ message: "Admin created successfully" });
+});
 
 
 // SERVER
