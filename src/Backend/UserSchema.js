@@ -15,11 +15,15 @@ const counselingSchema = new mongoose.Schema({
     lowercase: true,
     match: [/^\S+@\S+\.\S+$/, 'Please enter a valid email']
   },
-  phone: {
+  number: {
     type: String,
     required: [true, 'Phone is required'],
     match: [/^\d{10}$/, 'Phone must be 10 digits']
   },
+  phone: {
+  type: String,
+  required: [true, "Phone is required"],
+},
   
   // Academic Details (Required)
   currentClass: {

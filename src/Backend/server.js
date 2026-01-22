@@ -5,7 +5,13 @@ const connectDB = require('./Connectdb');
 const User = require("./UserSchema");
 const path = require('path');
 const studentRoutes = require('./routes/students');
+const errorHandler = require("./middleware/errorHandler");
+const multer = require("multer"); 
+const morgan = require("morgan");
 
+app.use(morgan("combined"));
+app.use("/api/students", studentRoutes);
+app.use(errorHandler);
 
 connectDB();
 
@@ -14,16 +20,20 @@ app.use(cors());            // Allow frontend to access backend
 app.use(express.json());    // Enable JSON body parsing
 app.use(express.urlencoded({ extended: true }));
 
+app.use('/api/courses', require('./routes/courses'));
+app.use('/api/events', require('./routes/events'));
+app.use('/api/notices', require('./routes/notices'));
+
 // POST ROUTE
 app.post("/add-user", async (req, res) => {
     try {
-        const { name, email, password, number } = req.body;
+        const { name, email, password, phone } = req.body;
 
         const newUser = new User({
             name,
             email,
             password,
-            number,
+            phone,
         });
 
         await newUser.save();

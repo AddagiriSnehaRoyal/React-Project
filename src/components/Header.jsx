@@ -27,7 +27,9 @@ const Header = () => {
     { path: '/career-test', label: 'Career Test' },
     { path: '/counseling', label: 'Counseling' },
     { path: '/career-paths', label: 'Courses' },
-    { path: '/study-tips', label: 'Study Tips' }
+    { path: '/study-tips', label: 'Study Tips' },
+  { path: '/admission-process', label: 'Admission Process' },
+  { path: '/events', label: 'Academic Events' }
   ];
 
   const handleLogin = () => {
@@ -117,7 +119,7 @@ const Header = () => {
                   fontSize: '0.9rem',
                   fontWeight: '700'
                 }}>
-                  {user.name.charAt(0)}
+                  {/* {user.name.charAt(0)} */}
                 </div>
                 <span style={{fontWeight: '500'}}>{user.name}</span>
               </div>

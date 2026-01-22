@@ -15,6 +15,8 @@ import NotFound from './pages/NotFound';
 import CareerTest from './pages/CareerTest';
 import MySessions from './pages/MySessions';
 import './index.css';
+import AdmissionProcess from './pages/AdmissionProcess';
+import Events from './pages/Events';
 
 function App() {
   return (
@@ -31,23 +33,26 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             
+<Route path="/admission-process" element={<AdmissionProcess />} />
+<Route path="/events" element={<Events />} />
+            
             {/* Protected Routes */}
-            <Route 
-              path="/student-dashboard" 
-              element={
-                <ProtectedRoute allowedRoles={['student']}>
-                  <StudentDashboard />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/admin-dashboard" 
-              element={
-                <ProtectedRoute allowedRoles={['admin']}>
-                  <AdminDashboard />
-                </ProtectedRoute>
-              } 
-            />
+             <Route 
+          path="/admin-dashboard" 
+          element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/student-dashboard" 
+          element={
+            <ProtectedRoute>
+              <StudentDashboard />
+            </ProtectedRoute>
+          } 
+        />
             
             <Route path="/career-test" element={<CareerTest />} />
             <Route path="/my-sessions" element={<MySessions />} />

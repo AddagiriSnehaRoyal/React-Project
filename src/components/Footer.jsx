@@ -13,6 +13,12 @@ const Footer = () => {
               <li><a href="/">Home</a></li>
               <li><a href="/career-paths">Career Paths</a></li>
               <li><a href="/study-tips">Study Tips</a></li>
+
+              <li><a href="/">Home</a></li>
+              <li><a href="/career-paths">Career Paths</a></li>
+              <li><a href="/study-tips">Study Tips</a></li>
+              <li><a href="/admission-process">Admission Process</a></li>
+
             </ul>
           </div>
           <div>
@@ -21,7 +27,7 @@ const Footer = () => {
             <p> +91 8639829311</p>
           </div>
         </div>
-        <div style={{textAlign: 'center', paddingTop: '2rem', borderTop: '1px solid rgba(255,255,255,0.1)'}}>
+        <div style={{ textAlign: 'center', paddingTop: '2rem', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
           <p>&copy; 2025 CareerGuide. All rights reserved.</p>
         </div>
       </div>

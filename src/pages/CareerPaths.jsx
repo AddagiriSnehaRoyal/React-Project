@@ -11,6 +11,7 @@ const CareerPaths = () => {
     const loadCareerPaths = async () => {
       await new Promise(resolve => setTimeout(resolve, 800));
       setCareerPaths([
+        // Career Paths (1-5)
         { 
           id: 1, 
           title: 'Engineering', 
@@ -18,7 +19,8 @@ const CareerPaths = () => {
           demand: 'Very High',
           image: 'https://png.pngtree.com/thumb_back/fh260/background/20240717/pngtree-web-design-homepage-concept-on-computer-display-with-copy-space-beside-image_15879675.jpg?w=400&fit=crop',
           skills: ['Python', 'JavaScript', 'React', 'AWS'],
-          growth: '25%'
+          growth: '25%',
+          type: 'career'
         },
         { 
           id: 2, 
@@ -27,7 +29,8 @@ const CareerPaths = () => {
           demand: 'High',
           image: 'https://plus.unsplash.com/premium_photo-1664297950425-99a968926a74?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZGF0YSUyMHNjaWVuY2V8ZW58MHx8MHx8fDA%3D?w=400&fit=crop',
           skills: ['Python', 'Machine Learning', 'SQL', 'Power BI'],
-          growth: '35%'
+          growth: '35%',
+          type: 'career'
         },
         { 
           id: 3, 
@@ -36,7 +39,8 @@ const CareerPaths = () => {
           demand: 'High',
           image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&fit=crop',
           skills: ['SEO', 'Google Ads', 'Social Media', 'Analytics'],
-          growth: '20%'
+          growth: '20%',
+          type: 'career'
         },
         { 
           id: 4, 
@@ -45,7 +49,8 @@ const CareerPaths = () => {
           demand: 'Very High',
           image: 'https://img.freepik.com/premium-vector/cyber-security-theme_23-2148543866.jpg?w=400&fit=crop',
           skills: ['Ethical Hacking', 'Network Security', 'SIEM', 'CISSP'],
-          growth: '30%'
+          growth: '30%',
+          type: 'career'
         },
         { 
           id: 5, 
@@ -54,7 +59,69 @@ const CareerPaths = () => {
           demand: 'Medium',
           image: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&fit=crop',
           skills: ['Agile', 'UX Research', 'Roadmapping', 'Jira', 'communication', 'leadership'],
-          growth: '22%'
+          growth: '22%',
+          type: 'career'
+        },
+        // Courses Offered (6-10) - Fixed data structure
+        { 
+          id: 6,
+          title: 'B.Tech CSE', 
+          seats: '120',
+          demand: 'Very High',
+          image: 'https://www.kzu.ac.in/storage/blogs/176621535573709797637.jpg?w=400&fit=crop',
+          eligibility: ['10+2 with PCM', 'JEE Mains', 'Min 60%'],
+          growth: '98%',
+          type: 'course',
+          duration: '4 Years',
+          fees: '₹2.5L/year'
+        },
+        { 
+          id: 7,
+          title: 'MBBS Medicine and Pharmacy', 
+          seats: '100',
+          demand: 'High',
+          image: 'https://www.thehitavada.com/Encyc/2020/7/28/2_12_00_45_MBBS-_1_H@@IGHT_409_W@@IDTH_655.jpg?w=400&fit=crop',
+          eligibility: ['NEET UG', '10+2 PCB 50%', 'Medical Fitness'],
+          growth: '95%',
+          type: 'course',
+          duration: '5.5 Years',
+          fees: '₹15L/year'
+        },
+        { 
+          id: 8,
+          title: 'B.Com Accounting & Finance', 
+          seats: '180',
+          demand: 'High',
+          image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&fit=crop',
+          eligibility: ['10+2 Any Stream', 'Min 50%'],
+          growth: '92%',
+          type: 'course',
+          duration: '3 Years',
+          fees: '₹45K/year'
+        },
+        { 
+          id: 9,
+          title: 'B.Sc Biotechnology', 
+          seats: '60',
+          demand: 'Medium',
+          image: 'https://blalbiotech.com/public/admin/images/blogs_resize/1691646563.jpg?w=400&fit=crop',
+          eligibility: ['10+2 PCB', 'Min 55%', 'Entrance Test'],
+          growth: '88%',
+          type: 'course',
+          duration: '3 Years',
+          fees: '₹60K/year'
+        },
+        { 
+          id: 10,
+          title: 'MBA Business Administration', 
+          seats: '80',
+          demand: 'Very High',
+          image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&fit=crop',
+          eligibility: ['Graduation', 'CAT/MAT', 'GD/PI'],
+          growth: '96%',
+          type: 'course',
+          duration: '2 Years',
+          fees: '₹3.2L/year'
         }
       ]);
       setLoading(false);
@@ -86,22 +153,33 @@ const CareerPaths = () => {
     return colors[demand] || '#6b7280';
   };
 
+  const getStat1Value = (path) => path.type === 'career' ? path.salary : path.seats;
+  const getStat1Label = (path) => path.type === 'career' ? 'Avg Salary' : 'Seats';
+  const getStat2Value = (path) => path.growth;
+  const getStat2Label = (path) => path.type === 'career' ? 'Growth Rate' : 'Placement Rate';
+  const getTags = (path) => path.type === 'career' ? (path.skills || []) : (path.eligibility || []);
+
   return (
     <div className="container">
       {/* Hero Header */}
       <section className="card" style={{textAlign: 'center', padding: '4rem 2rem', marginBottom: '4rem'}}>
         <h1 style={{color: 'var(--teal)', fontSize: 'clamp(2.5rem, 6vw, 3.5rem)', marginBottom: '1rem'}}>
-          Explore Top Career Paths
+          Explore Top Career Paths & Courses
         </h1>
         <p style={{fontSize: '1.3rem', color: 'var(--gray-600)', maxWidth: '700px', margin: '0 auto 3rem'}}>
-          Discover trending careers with real salary data, market demand, and essential skills
+          Discover trending careers and academic programs with real market data
         </p>
-        <Link to="/counseling" className="btn" style={{padding: '18px 40px', fontSize: '1.1rem'}}>
-          Get Expert Counseling
-        </Link>
+        <div style={{display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap'}}>
+          <Link to="/counseling" className="btn" style={{padding: '18px 32px', fontSize: '1.1rem'}}>
+            Get Expert Counseling
+          </Link>
+          <Link to="/courses-offered" className="btn btn-secondary" style={{padding: '18px 32px', fontSize: '1.1rem'}}>
+            View All Courses
+          </Link>
+        </div>
       </section>
 
-      {/* Career Cards Grid */}
+      {/* Career/Course Cards Grid */}
       <section className="card" style={{padding: '3rem 2rem'}}>
         <div className="grid" style={{gap: '2.5rem'}}>
           {careerPaths.map((path) => (
@@ -116,7 +194,7 @@ const CareerPaths = () => {
                 overflow: 'hidden'
               }}
             >
-              {/* Career Image */}
+              {/* Image */}
               <div style={{
                 height: '220px',
                 overflow: 'hidden',
@@ -146,6 +224,19 @@ const CareerPaths = () => {
                 }}>
                   {path.demand} Demand
                 </div>
+                <div style={{
+                  position: 'absolute',
+                  bottom: '20px',
+                  left: '20px',
+                  background: path.type === 'course' ? 'var(--teal)' : 'rgba(16,185,129,0.9)',
+                  color: 'white',
+                  padding: '0.5rem 1rem',
+                  borderRadius: '20px',
+                  fontSize: '0.8rem',
+                  fontWeight: 600
+                }}>
+                  {path.type === 'course' ? 'Course' : 'Career'}
+                </div>
               </div>
 
               {/* Content */}
@@ -160,14 +251,16 @@ const CareerPaths = () => {
                   {path.title}
                 </h3>
                 
-                <div style={{
-                  color: getDemandColor(path.demand),
-                  fontSize: '1rem',
-                  fontWeight: 600,
-                  marginBottom: '0.5rem'
-                }}>
-                  Annual Job Growth: {path.growth}
-                </div>
+                {path.type === 'course' && path.duration && (
+                  <div style={{
+                    color: getDemandColor(path.demand),
+                    fontSize: '1rem',
+                    fontWeight: 600,
+                    marginBottom: '0.5rem'
+                  }}>
+                    {path.duration} • {path.fees}
+                  </div>
+                )}
 
                 {/* Stats Cards */}
                 <div style={{
@@ -184,9 +277,9 @@ const CareerPaths = () => {
                     textAlign: 'center'
                   }}>
                     <div style={{fontSize: '1.4rem', fontWeight: 800, marginBottom: '0.25rem'}}>
-                      {path.salary}
+                      {getStat1Value(path)}
                     </div>
-                    <div style={{fontSize: '0.85rem', opacity: 0.95}}>Avg Salary</div>
+                    <div style={{fontSize: '0.85rem', opacity: 0.95}}>{getStat1Label(path)}</div>
                   </div>
                   
                   <div style={{
@@ -197,13 +290,13 @@ const CareerPaths = () => {
                     textAlign: 'center'
                   }}>
                     <div style={{fontSize: '1.4rem', fontWeight: 800, marginBottom: '0.25rem'}}>
-                      {path.growth}
+                      {getStat2Value(path)}
                     </div>
-                    <div style={{fontSize: '0.85rem', opacity: 0.95}}>Growth Rate</div>
+                    <div style={{fontSize: '0.85rem', opacity: 0.95}}>{getStat2Label(path)}</div>
                   </div>
                 </div>
 
-                {/* Skills */}
+                {/* Tags */}
                 <div style={{marginBottom: '2.5rem'}}>
                   <div style={{
                     fontSize: '1.1rem',
@@ -211,10 +304,10 @@ const CareerPaths = () => {
                     color: 'var(--gray-900)',
                     marginBottom: '1rem'
                   }}>
-                    Required Skills
+                    {path.type === 'course' ? 'Eligibility Criteria' : 'Required Skills'}
                   </div>
                   <div style={{display: 'flex', flexWrap: 'wrap', gap: '0.75rem'}}>
-                    {path.skills.map((skill, index) => (
+                    {getTags(path).map((tag, index) => (
                       <span 
                         key={index}
                         style={{
@@ -227,7 +320,7 @@ const CareerPaths = () => {
                           border: '1px solid rgba(13,148,136,0.2)'
                         }}
                       >
-                        {skill}
+                        {tag}
                       </span>
                     ))}
                   </div>
@@ -236,7 +329,7 @@ const CareerPaths = () => {
                 {/* Action Buttons */}
                 <div style={{display: 'flex', gap: '1rem', flexWrap: 'wrap'}}>
                   <Link 
-                    to="/counseling" 
+                    to={path.type === 'course' ? "/contact-us" : "/counseling"} 
                     className="btn" 
                     style={{
                       flex: 1,
@@ -247,12 +340,10 @@ const CareerPaths = () => {
                       background: 'linear-gradient(135deg, var(--teal), var(--teal-light))'
                     }}
                   >
-                    Book Counseling
+                    {path.type === 'course' ? 'Apply Now' : 'Book Counseling'}
                   </Link>
-                  <a 
-                    href="https://www.lpu.in/blog/best-career-options-after-12th-top-career-choices-opportunities/"
-                    target="_blank" 
-                    rel="noopener noreferrer"
+                  <Link 
+                    to={path.type === 'course' ? "/admission-process" : "/career-test"} 
                     className="btn btn-secondary" 
                     style={{
                       flex: 1,
@@ -261,8 +352,8 @@ const CareerPaths = () => {
                       textAlign: 'center'
                     }}
                   >
-                    Learn More
-                  </a>
+                    {path.type === 'course' ? 'Admission Process' : 'Take Test'}
+                  </Link>
                 </div>
               </div>
             </div>
